@@ -13,15 +13,15 @@ namespace GameJame.System
         /// <summary>
         /// Gets the users data from the config file
         /// </summary>
-        /// <param name="userData"></param>
-        /// <returns>True, if the user has any data in the file, otherwise false</returns>
-        public bool TryLevelsCompleted(out TrackedLevels userData)
+        /// <param name="trackedLevels"></param>
+        /// <returns>True, if the user has any tracked levels, otherwise false</returns>
+        public bool TryLevelsCompleted(out TrackedLevels trackedLevels)
         {
             var config = new ConfigFile();
             if (config.Load(_savePath + _saveFile) != Error.Ok)
             {
-                GD.Print("Couldn't load player data because none exists");
-                userData = null;
+                GD.Print("The player has not been to any levels");
+                trackedLevels = null;
                 return false;
             }
 
@@ -31,7 +31,7 @@ namespace GameJame.System
             {
                 levelsCompleted[scene] = (bool)config.GetValue(_levelSectionHeader, scene);
             }
-            userData = new TrackedLevels(levelsCompleted);
+            trackedLevels = new TrackedLevels(levelsCompleted);
             return true;
         }
 
@@ -46,7 +46,7 @@ namespace GameJame.System
             var error = config.Load(_savePath + _saveFile);
             if (error != Error.Ok)
             {
-                GD.Print( "Creating a new save file for player, as none exists" );
+                GD.Print( "Creating a new level tracker file for player, as none exists" );
             }
             config.SetValue(_levelSectionHeader, scene, completed);
             config.Save(_savePath + _saveFile);
