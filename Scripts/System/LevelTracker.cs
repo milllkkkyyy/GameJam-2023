@@ -15,7 +15,7 @@ namespace GameJame.System
         /// </summary>
         /// <param name="trackedLevels"></param>
         /// <returns>True, if the user has any tracked levels, otherwise false</returns>
-        public bool TryLevelsCompleted(out TrackedLevels trackedLevels)
+        public bool TryGetLevelsCompleted(out TrackedLevels trackedLevels)
         {
             var config = new ConfigFile();
             if (config.Load(_savePath + _saveFile) != Error.Ok)
