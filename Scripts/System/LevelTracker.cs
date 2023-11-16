@@ -4,10 +4,10 @@ using System.Diagnostics;
 
 namespace GameJame.System
 {
-    public class UserDataManager
+    public class LevelTracker
     {
         private readonly string _savePath = "user://";
-        private readonly string _saveFile = "UserData.cfg";
+        private readonly string _saveFile = "TrackedLevels.cfg";
         private readonly string _levelSectionHeader = "levels_completed";
 
         /// <summary>
@@ -15,7 +15,7 @@ namespace GameJame.System
         /// </summary>
         /// <param name="userData"></param>
         /// <returns>True, if the user has any data in the file, otherwise false</returns>
-        public bool TryGetUserLevelsCompleted(out UserData userData)
+        public bool TryLevelsCompleted(out TrackedLevels userData)
         {
             var config = new ConfigFile();
             if (config.Load(_savePath + _saveFile) != Error.Ok)
@@ -31,7 +31,7 @@ namespace GameJame.System
             {
                 levelsCompleted[scene] = (bool)config.GetValue(_levelSectionHeader, scene);
             }
-            userData = new UserData(levelsCompleted);
+            userData = new TrackedLevels(levelsCompleted);
             return true;
         }
 
@@ -53,11 +53,11 @@ namespace GameJame.System
         }
     }
 
-    public class UserData
+    public class TrackedLevels
     {
         public Dictionary<string, bool> LevelsCompleted { get; }
 
-        public UserData(Dictionary<string, bool> levesCompleted)
+        public TrackedLevels(Dictionary<string, bool> levesCompleted)
         {
             LevelsCompleted = levesCompleted;
         }
