@@ -1,8 +1,7 @@
 using Godot;
-using System;
 
 
-namespace GameJame.System 
+namespace GameJame.Player
 {
     public class PlayerCamera : Spatial
     {

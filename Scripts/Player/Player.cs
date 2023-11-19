@@ -1,4 +1,3 @@
-using GameJame.System;
 using Godot;
 
 namespace GameJame.Player
